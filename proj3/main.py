@@ -1,5 +1,6 @@
 import random
 
+from decorators import log_time
 from conf import GAME_CHOICES, RULES, scorebord
 
 
@@ -50,7 +51,8 @@ def update_scoreboard(result):
     print('##', f'system: {scorebord["system"]}'.ljust(24), "##")
     print('#' * 30)
 
-def play():
+
+def play_one_hand():
     """
     Main play ground handler
     """
@@ -73,6 +75,15 @@ def play():
     play_again = input("Do you want to play again? (y/n):")
     if play_again == 'y':
         play()
-
+@log_time
+def play():
+    play_one_hand()
+    
 if __name__ == '__main__':
-   play()
+    # start_time = datetime.now()
+    play()
+    # end_time = datetime.now()
+    # duration = end_time - start_time
+    # print(
+    #     f"Total time: {duration.seconds // 3600: {duration.seconds // 60}: {duration.seconds % 60}}"
+    # )
